@@ -15,6 +15,9 @@
 *.userosscache
 *.sln.docstates
 
+# github workflow secrets for local testing
+.github/**/*.secrets
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
