@@ -1,0 +1,41 @@
+name: Deploy
+on: ['deployment']
+
+jobs:
+  deployment:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: 'Deploy'
+      uses: 'deliverybot/helm@v1'
+      with:
+        helm: 'helm3'
+        release: 'webapi'
+        namespace: 'ebiz'
+        chart: 'meecothonrepo/generic-webapi'
+        version: '0.3.1'
+        repo: 'https://christopherlenz.github.io/meecothon-helm-chart/'
+        repo-alias: meecothonrepo
+        token: '${{ github.token }}'
+        values: |
+          image.repository: registry.digitalocean.com/lenz-a-lot/christopherlenz/ebiz_cm_k8s_api_client/ebiz_cm_k8s_api_client
+          image.tag: init
+          resources.limits.cpu: 500m
+          resources.limits.memory: 500Mi
+          resources.requests.cpu: 20m
+          resources.requests.memory: 20Mi
+          image.pullSecrets.useImageCredentials: true
+          image.pullSecrets.name: docker-cfg
+          service.type: NodePort
+          serviceAccountName: open-api-account
+      env:
+        KUBECONFIG_FILE: '${{ secrets.KUBE_CONFIG }}'
+
+    # runs-on: 'ubuntu-latest'
+    # steps:
+    #   - name: Deploy
+    #     uses: WyriHaximus/github-action-helm3@v2
+    #     with:
+    #       exec: helm repo add meecothonrepo https://christopherlenz.github.io/meecothon-helm-chart/ && helm repo update && helm upgrade --install --version 0.3.1 -n ebiz --set image.repository=registry.digitalocean.com/lenz-a-lot/christopherlenz/ebiz_cm_k8s_api_client/ebiz_cm_k8s_api_client --set image.tag=init --set resources.limits.cpu="500m" --set resources.limits.memory="500Mi" --set resources.requests.cpu="20m" --set resources.requests.memory="20Mi" --set image.pullSecrets.useImageCredentials=true --set image.pullSecrets.name="docker-cfg" --set service.type=NodePort --set serviceAccountName=open-api-account webapi meecothonrepo/generic-webapi
+    #       kubeconfig: '${{ secrets.KUBE_CONFIG }}'

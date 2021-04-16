@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ebiz_cm_k8s_api_client", "src\ebiz_cm_k8s_api_client\ebiz_cm_k8s_api_client.csproj", "{C59092B6-4131-4AFD-8C15-AAEBC14A51DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C59092B6-4131-4AFD-8C15-AAEBC14A51DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C59092B6-4131-4AFD-8C15-AAEBC14A51DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C59092B6-4131-4AFD-8C15-AAEBC14A51DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C59092B6-4131-4AFD-8C15-AAEBC14A51DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
