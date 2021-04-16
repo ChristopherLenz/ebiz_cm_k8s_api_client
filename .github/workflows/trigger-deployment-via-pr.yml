@@ -1,0 +1,19 @@
+name: Deployment Trigger
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  deploy:
+    name: Deploy branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create deployment
+        id: create_deployment
+        uses: alexjurkiewicz/pr-comment-github-deployment@v3
+        with:
+          trigger_phrase: "/deploy"
+          allow_draft: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
