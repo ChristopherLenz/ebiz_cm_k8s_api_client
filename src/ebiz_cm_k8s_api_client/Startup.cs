@@ -26,10 +26,19 @@ namespace ebiz_cm_k8s_api_client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Ideally this config would be read from the .net core config constructs,
-            // but that has not been implemented in the KubernetesClient library at
-            // the time this sample was created.
-            var config = KubernetesClientConfiguration.BuildDefaultConfig();
+            KubernetesClientConfiguration config = null;
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            {
+                // Ideally this config would be read from the .net core config constructs,
+                // but that has not been implemented in the KubernetesClient library at
+                // the time this sample was created.
+                config = KubernetesClientConfiguration.BuildConfigFromConfigFile();
+            }
+            else
+            {
+                config = KubernetesClientConfiguration.InClusterConfig();
+            }
+            
             services.AddSingleton(config);
             
             // Setup the http client
