@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using k8s;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace ebiz_cm_k8s_api_client
 {
@@ -40,6 +38,8 @@ namespace ebiz_cm_k8s_api_client
             }
             
             services.AddSingleton(config);
+            
+            services.AddHostedService<MonitorConfigMapsHostedService>();
             
             // Setup the http client
             services.AddHttpClient("K8s")
